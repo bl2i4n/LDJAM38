@@ -1,3 +1,10 @@
+//Aliases
+var Container = PIXI.Container,
+    autoDetectRenderer = PIXI.autoDetectRenderer,
+    loader = PIXI.loader,
+    resources = PIXI.loader.resources,
+    Sprite = PIXI.Sprite;
+//create pixi stage and renderer
 var stage = new PIXI.Container(),
     renderer = PIXI.autoDetectRenderer(480, 480);
 document.body.appendChild(renderer.view);
@@ -10,12 +17,14 @@ PIXI.loader
     "images/evilplanet.png",
     "images/background.png"
   ])
-
   .load(setup);
 
+//define global variables
+var enemy;
+var state;
 //This `setup` function will run when the image has loaded
 function setup() {
-
+  state = play;
   //Create the `earth` sprite from the texture
   var earth = new PIXI.Sprite(
     PIXI.loader.resources["images/earth_character.png"].texture
@@ -57,17 +66,28 @@ function setup() {
   }
 
   //Render the stage
+  gameLoop();
+}
+
+function gameLoop() {
+  //Runs the current game `state` in a loop and renders the sprites
+  // Loop this function at 60 frames per second
+  requestAnimationFrame(gameLoop);
+  //Move the cat 1 pixel to the right each frame
+  state();
+  //Render the stage to see the animation
   renderer.render(stage);
 }
 
 
-
-function gameLoop() {
-  //Runs the current game `state` in a loop and renders the sprites
-}
-
 function play() {
   //All the game logic goes here
+  // var enemy = new PIXI.Sprite(
+  //   PIXI.loader.resources["images/evilplanet.png"].texture
+  // );
+  // console.log(enemy);
+  // enemy.x = 410
+  enemy.x -= 10;
 }
 
 function end() {
