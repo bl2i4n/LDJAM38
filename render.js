@@ -6,7 +6,9 @@ document.body.appendChild(renderer.view);
 PIXI.loader
   .add([
     "images/earth_character.png",
-    "images/heart.png"
+    "images/heart.png",
+    "images/evilplanet.png",
+    "images/background.png"
   ])
 
   .load(setup);
@@ -21,6 +23,27 @@ function setup() {
   earth.x = 210;
   earth.y = 210;
 
+  //Create evil planet that moves automatically
+  var enemy = new PIXI.Sprite(
+    PIXI.loader.resources["images/evilplanet.png"].texture
+  );
+  enemy.x = 410;
+  enemy.y = 210;
+
+  var background = new PIXI.Sprite(
+    PIXI.loader.resources["images/background.png"].texture
+  );
+
+  //variable for score
+  // var message = new Text(
+  //   "Score 999",
+  //   {fontFamily: 'Arial', fontSize: 32, fill: "white"}
+  // );
+  // stage.addChild(message);
+  stage.addChild(background);
+  stage.addChild(earth);
+  stage.addChild(enemy);
+
   //Code for hearts/lives
   var numOfHearts = 5;
   for (var i=0;i<numOfHearts; i++){
@@ -31,26 +54,11 @@ function setup() {
     heart.x = 10 + offSetHearts;
     heart.y = 10;
     stage.addChild(heart);
-  };
-  //variable for score
-  var message = new Text(
-    "Score 999",
-    {fontFamily: 'Arial', fontSize: 32, fill: "white"}
-  );
-  message.x = 250;
-  message.y = 10;
-  //Add the heart to the stage
-  stage.addChild(earth);
-  //add messaging to stage
-  stage.addChild(message);
+  }
 
   //Render the stage
   renderer.render(stage);
 }
-
-
-
-
 
 
 
