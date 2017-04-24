@@ -82,11 +82,11 @@ function gameLoop() {
 
 function play() {
   //All the game logic goes here
-  // var enemy = new PIXI.Sprite(
-  //   PIXI.loader.resources["images/evilplanet.png"].texture
-  // );
+  var enemy = new PIXI.Sprite(
+    PIXI.loader.resources["images/evilplanet.png"].texture
+  );
   // console.log(enemy);
-  // enemy.x = 410
+  enemy.x = 410
   enemy.x -= 10;
 }
 
