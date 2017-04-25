@@ -20,20 +20,26 @@ PIXI.loader
   .load(setup);
 
 //define global variables
-var enemy;
-var state;
+var earth, enemy, numOfHearts, state, message;
+
 //This `setup` function will run when the image has loaded
 function setup() {
+  message = new Text(
+  {fontFamily: "Arial", fontSize: 32, fill: "white"}
+  );
+
+  //set up bump library
+  b = new Bump(PIXI);
   state = play;
   //Create the `earth` sprite from the texture
-  var earth = new PIXI.Sprite(
+  earth = new PIXI.Sprite(
     PIXI.loader.resources["images/earth_character.png"].texture
   );
   earth.x = 210;
   earth.y = 210;
 
   //Create evil planet that moves automatically
-  var enemy = new PIXI.Sprite(
+  enemy = new PIXI.Sprite(
     PIXI.loader.resources["images/evilplanet.png"].texture
   );
   enemy.x = 410;
@@ -54,7 +60,7 @@ function setup() {
   stage.addChild(enemy);
 
   //Code for hearts/lives
-  var numOfHearts = 5;
+  numOfHearts = 5;
   for (var i=0;i<numOfHearts; i++){
     var heart = new PIXI.Sprite(
       PIXI.loader.resources["images/heart.png"].texture
@@ -65,7 +71,8 @@ function setup() {
     stage.addChild(heart);
   }
 
-  //Render the stage
+
+  //Start the game loop
   gameLoop();
 }
 
@@ -73,22 +80,30 @@ function gameLoop() {
   //Runs the current game `state` in a loop and renders the sprites
   // Loop this function at 60 frames per second
   requestAnimationFrame(gameLoop);
-  //Move the cat 1 pixel to the right each frame
-  state();
   //Render the stage to see the animation
   renderer.render(stage);
-}
 
+  state();
+}
 
 function play() {
   //All the game logic goes here
-  var enemy = new PIXI.Sprite(
-    PIXI.loader.resources["images/evilplanet.png"].texture
-  );
-  // console.log(enemy);
-  enemy.x = 410
-  enemy.x -= 10;
+  //Move the enemy 1 pixel to the right each frame
+  enemy.x -= 1;
+
+  //check for a collision between the cat and the box
+  if (b.hitTestRectangle(earth, enemy)){
+     //if there is a collision, change the message text and change tint red
+     message.text = "hit!";
+     enemy.tint = 0xff3300;
+     numOfHearts -= 1;
+  } else{
+    //if thre is no collision reset the message and box color
+    message.text = "No collision...";
+    enemy.tint = 0xccff99;
+  }
 }
+
 
 function end() {
   //All the code that should run at the end of the game
