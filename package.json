@@ -1,0 +1,24 @@
+{
+  "name": "ldjam38",
+  "version": "1.0.0",
+  "description": "Working on a game that is similar to Google's Meowloween/Halloween 2016 game.",
+  "main": "render.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bl2i4n/LDJAM38.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bl2i4n/LDJAM38/issues"
+  },
+  "homepage": "https://github.com/bl2i4n/LDJAM38#readme",
+  "dependencies": {
+    "connect": "^3.6.5",
+    "serve-static": "^1.13.1"
+  }
+}
