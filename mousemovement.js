@@ -41,14 +41,15 @@ function getMouseDirection(e) {
     //deal with the horizontal case
     if (oldX < e.pageX) {
         xDirection = "right";
-    } else {
+        //two more if statements
+    } else if (oldX > e.pageX){
         xDirection = "left";
     }
 
     //deal with the vertical case
     if (oldY < e.pageY) {
         yDirection = "down";
-    } else {
+    } else if( oldY > e.pageY){
         yDirection = "up";
     }
 
