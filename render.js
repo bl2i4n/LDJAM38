@@ -63,16 +63,16 @@ function setup() {
     PIXI.loader.resources["images/background.png"].texture
   );
 
-  var heart = new PIXI.Sprite(
+  heart = new PIXI.Sprite(
     PIXI.loader.resources["images/heart.png"].texture
   );
-  var heart2 = new PIXI.Sprite(
+  heart2 = new PIXI.Sprite(
     PIXI.loader.resources["images/heart.png"].texture
   );
   heart2.x = 30;
   heart2.y = 0;
 
-  var heart3 = new PIXI.Sprite(
+  heart3 = new PIXI.Sprite(
     PIXI.loader.resources["images/heart.png"].texture
   );
   heart3.x = 60;
@@ -87,19 +87,7 @@ function setup() {
   stage.addChild(heart2);
   stage.addChild(heart3);
 
-  //Code for hearts/lives
-  // numOfHearts = 5;
-  // for (var i=0;i<numOfHearts; i++){
-  //   var heart = new PIXI.Sprite(
-  //     PIXI.loader.resources["images/heart.png"].texture
-  //   );
-  //   var offSetHearts = 27 * i;
-  //   heart.x = 10 + offSetHearts;
-  //   heart.y = 10;
-  //   stage.addChild(heart);
-  // }
 
-  //Start the game loop
   gameLoop();
 }
 
@@ -114,6 +102,7 @@ function gameLoop() {
 }
 
 function play() {
+  // heart.vx = 1;
   //All the game logic goes here
   //Move the enemy 1 pixel to the right each frame
   enemy.x -= 1;
@@ -130,23 +119,26 @@ function play() {
 
   //check for a collision between the earth and the enemy
   if (b.hitTestRectangle(earth, enemy)){
-     //if there is a collision, change the message text and change tint red
-     enemy.tint = 0xff3300;
-     stage.removeChild(enemy);
-    //  enemy2.tint = 0xff3300;
-    //  stage.removeChild(enemy2);
-    //  enemy3.tint = 0xff3300;
-    //  stage.removeChild(enemy3);
     stage.removeChild(heart);
     stage.removeChild(heart2);
     stage.removeChild(heart3);
-
+    // console.log("we are hit!")f
+    earth.alpha = 0.5;
+    // console.log(stage.removeChild(enemy))
+    //if there is a collision, change the message text and change tint red
+    enemy.tint = 0xff3300;
+    enemy2.tint = 0xff3300;
+    enemy3.tint = 0xff3300;
+    if(stage.removeChild(heart) == true){
+      app.stage.addChild(gameOverScene);
+    }
   } else{
     //if thre is no collision reset the message and box color
     enemy.tint = 0xccff99;
     enemy2.tint = 0xccff99;
     enemy3.tint = 0xccff99;
   }
+
 }
 
 
