@@ -55,9 +55,9 @@ function getMouseDirection(e) {
 
     oldX = e.pageX;
     oldY = e.pageY;
-
-    console.log(xDirection);
-    console.log(yDirection)
+    // 
+    // console.log(xDirection);
+    // console.log(yDirection)
 }
 
 

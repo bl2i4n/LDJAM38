@@ -7,19 +7,25 @@ let Application = PIXI.Application,
     TextureCache = PIXI.utils.TextureCache,
     Sprite = PIXI.Sprite,
     Text = PIXI.Text,
-    TextStyle = PIXI.TextStyle;
-//Create a Pixi Application
-let app = new Application({
-    width: 512,
-    height: 512,
-    antialiasing: true,
-    transparent: false,
-    resolution: 1
-  }
-);
+    TextStyle = PIXI.TextStyle,
+    t = Tink(PIXI, renderer.view);
 
-//add the canvas that Pixi automatically created for you
-document.body.appendChild(renderer.view);
+
+// //Create a Pixi Application
+var stage = new Container(),
+renderer = PIXI.autoDetectRenderer(480, 480);
+document.body.appendChild(renderer.view)
+
+// let app = new Application({
+//     width: 512,
+//     height: 512,
+//     antialiasing: true,
+//     transparent: false,
+//     resolution: 1
+//   }
+// );
+// //Add the canvas that Pixi automatically created for you to the HTML document
+// document.body.appendChild(app.view);
 
 loader
   .add([
@@ -32,7 +38,135 @@ loader
 
   //Define variables that might be used in more
   //than one function
-var earth, enemy, enemy2, enemy3, heart, heart2, heart3, state, message, menuScene;
+var style, earth, enemy, enemy2, enemy3, heart, heart2, heart3, state, message, menuScene, gameScene, gameOverScene;
+
+function setup(){
+  console.log("right on top of menuScene")
+
+  menuScene = new PIXI.Container();
+  stage.addChild(menuScene);
+
+  style = new TextStyle({
+  fontFamily: "Arial",
+  fontSize: 36,
+  fill: "white",
+  stroke: '#ff3300',
+  strokeThickness: 4,
+  dropShadow: true,
+  dropShadowColor: "#000000",
+  dropShadowBlur: 4,
+  dropShadowAngle: Math.PI / 6,
+  dropShadowDistance: 6,
+});
+
+  message = new Text("Menu", style);
+  message.position.set(54, 96);
+  message.x = 210;
+  message.y = 210;
+
+  message.interactive = true;
+  message.buttonMode = true;
+  message.on('pointerdown', onClick);
+
+
+
+  menuScene.addChild(message);
+
+  style = new TextStyle({
+  fontFamily: "Arial",
+  fontSize: 36,
+  fill: "white",
+  stroke: '#ff3300',
+  strokeThickness: 4,
+  dropShadow: true,
+  dropShadowColor: "#000000",
+  dropShadowBlur: 4,
+  dropShadowAngle: Math.PI / 6,
+  dropShadowDistance: 6,
+});
+
+  //   //Create the `earth` sprite from the texture
+    earth = new Sprite(
+      PIXI.loader.resources["images/earth_character.png"].texture
+    );
+    earth.x = 210;
+    earth.y = 210;
+
+    stage.addChild(earth);
+
+  gameLoop();
+}
+
+function gameLoop(delta){
+    // renderer.render(stage);
+    renderer.render(menuScene);
+    //Update Tink
+    t.update();
+}
+
+function play(delta){
+}
+
+function end(){
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //Aliases
 // var Container = PIXI.Container,
 //     autoDetectRenderer = PIXI.autoDetectRenderer,
