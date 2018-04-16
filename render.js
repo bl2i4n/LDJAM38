@@ -7,13 +7,12 @@ let Application = PIXI.Application,
     TextureCache = PIXI.utils.TextureCache,
     Sprite = PIXI.Sprite,
     Text = PIXI.Text,
-    TextStyle = PIXI.TextStyle,
-    t = Tink(PIXI, renderer.view);
-
+    TextStyle = PIXI.TextStyle;
 
 // //Create a Pixi Application
 var stage = new Container(),
 renderer = PIXI.autoDetectRenderer(480, 480);
+let t = new Tink(PIXI, renderer.view);
 document.body.appendChild(renderer.view)
 
 // let app = new Application({
@@ -26,6 +25,7 @@ document.body.appendChild(renderer.view)
 // );
 // //Add the canvas that Pixi automatically created for you to the HTML document
 // document.body.appendChild(app.view);
+
 
 loader
   .add([
@@ -41,6 +41,7 @@ loader
 var style, earth, enemy, enemy2, enemy3, heart, heart2, heart3, state, message, menuScene, gameScene, gameOverScene;
 
 function setup(){
+
   console.log("right on top of menuScene")
 
   menuScene = new PIXI.Container();
@@ -66,11 +67,13 @@ function setup(){
 
   message.interactive = true;
   message.buttonMode = true;
-  message.on('pointerdown', onClick);
-
-
+  t.makeInteractive(message);
 
   menuScene.addChild(message);
+  message.press = () => {
+    console.log("pressed");
+  }
+
 
   style = new TextStyle({
   fontFamily: "Arial",
