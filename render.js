@@ -32,18 +32,18 @@ loader
     "images/earth_character.png",
     "images/heart.png",
     "images/evilplanet.png",
+    "images/start_button.png",
     "images/background.png"
   ])
   .load(setup);
 
   //Define variables that might be used in more
   //than one function
-var style, earth, enemy, enemy2, enemy3, heart, heart2, heart3, state, message, menuScene, gameScene, gameOverScene;
+var start_button, style, earth, enemy, enemy2, enemy3, heart, heart2, heart3, state, message, menuScene, gameScene, gameOverScene;
 
 function setup(){
 
   console.log("right on top of menuScene")
-
   menuScene = new PIXI.Container();
   stage.addChild(menuScene);
 
@@ -65,8 +65,8 @@ function setup(){
   message.x = 210;
   message.y = 210;
 
-  message.interactive = true;
-  message.buttonMode = true;
+  // message.interactive = true;
+  // message.buttonMode = true;
   t.makeInteractive(message);
 
   menuScene.addChild(message);
@@ -96,6 +96,14 @@ function setup(){
     earth.y = 210;
 
     stage.addChild(earth);
+
+    start_button = new Sprite(
+      PIXI.loader.resources["images/start_button.png"].texture
+    );
+    t.makeInteractive(start_button);
+    start_button.release = () => console.log("pressed");
+
+    menuScene.addChild(start_button);
 
   gameLoop();
 }
